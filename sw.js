@@ -1,9 +1,9 @@
 // Beastbound service worker (same strategy as the Canon one).
 //
-//  - The app SHELL (index.html, manifest.json, icons) is served network-first.
-//    Every deploy is picked up on the next load that has connectivity: no
-//    version bump and no cache clearing. The saved copy only exists so the
-//    game can still open with no network.
+//  - The game PAGE opens instantly from the saved copy, then the newest build is
+//    fetched in the background. A NEW BUILD READY prompt offers the switch, so
+//    slow connections never delay launching. Icons and the manifest stay
+//    network-first.
 //  - Google Fonts are served cache-first (their URLs never change).
 //  - Everything else goes straight to the network, untouched.
 //
@@ -136,6 +136,10 @@ async function networkFirst(request, event) {
 
   const cached = await fromCache();
   if (!cached) return networkPromise; // first ever load: nothing saved, so wait
+
+  // The game opens instantly from the saved copy; the fresh build downloads in the
+  // background and a NEW BUILD READY prompt offers the switch.
+  if (isNav) { servedSavedCopy = true; return cached; }
 
   const timeout = new Promise((resolve) => setTimeout(() => resolve(null), SHELL_NETWORK_TIMEOUT_MS));
   try {

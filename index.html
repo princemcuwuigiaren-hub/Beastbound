@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
 <meta name="theme-color" content="#0b0a1c">
 <meta name="mobile-web-app-capable" content="yes">
@@ -12,7 +12,8 @@
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Beastbound</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;800&display=swap" media="print" onload="this.media='all'">
 <style>
 :root{
   --night:#0b0a1c; --dusk:#241349; --moon:#f3e3b3; --ember:#ff7a2f; --gold:#e8c36a;
@@ -111,7 +112,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .acts{display:flex;gap:8px}.acts button{min-height:30px;padding:4px 14px;font-size:12px}
 .hand{display:flex;overflow-x:auto;overflow-y:hidden;padding:12px 6px 2px;flex:0 0 auto;scrollbar-width:none}
 .hand::before,.hand::after{content:'';margin:auto}
-.hand .card+.card{margin-left:calc(var(--cw)*-.2)}
+.hand .card+.card{margin-left:var(--ov,calc(var(--cw)*-.2))}
 .hand .card.no{filter:brightness(.55)}.hand .card.ok{transform:translateY(-12px);box-shadow:0 0 16px var(--c),0 5px 12px #000;cursor:pointer;z-index:2}
 #modal{position:fixed;inset:0;z-index:7;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;padding:12px}
 .box{background:linear-gradient(160deg,#241448,#0d0820);border:1px solid var(--gold);border-radius:12px;padding:16px;width:min(92vw,380px);max-height:96vh;overflow:auto;display:flex;flex-direction:column;gap:8px;text-align:center}
@@ -166,6 +167,34 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 #build{position:absolute;bottom:10px;left:0;right:0;text-align:center;font-size:10px;letter-spacing:.2em;opacity:.45;z-index:2}
 #upd{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:10px;padding:8px 12px;border:1px solid var(--gold);background:#1a1038;border-radius:10px;font-size:12px;letter-spacing:.1em;color:var(--moon)}
 #upd button{min-height:32px;padding:4px 12px;font-size:12px}
+*,*::before,*::after{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+html,body{touch-action:pan-x pan-y;overscroll-behavior:none}
+.scr{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;gap:8px;padding:8px 12px;background:radial-gradient(ellipse at 50% 30%,#241448,#07060f 80%)}
+.scrbody{flex:1;min-height:0;overflow-y:auto;padding:4px 8px 12px;font-size:12px;line-height:1.5;color:#e8dcc0;-webkit-overflow-scrolling:touch}
+.scrbody h3{margin:12px 0 2px;font-size:12px;letter-spacing:.2em;color:var(--gold)}.scrbody p{margin:0 0 4px}.scrbody ul{margin:2px 0 4px;padding-left:18px}.scrbody li{margin:2px 0}
+.rules{columns:2 260px;column-gap:26px}.rules h3{break-after:avoid}.rules li,.rules p{break-inside:avoid}
+.srow{padding:10px 0;border-bottom:1px solid rgba(232,195,106,.18)}.srow h3{margin:0 0 2px}.srow p{max-width:560px;opacity:.85}
+.segs{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}.seg{min-height:38px;padding:6px 14px;font-size:12px}.seg.on{background:linear-gradient(180deg,#ffd27a,#ff9a3c);color:#2a1300;border-color:#ffb066;font-weight:800}.seg.danger{border-color:#ff6a5a;color:#ffb0a6}
+.bwrap{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10px;letter-spacing:.06em}.bwrap button{width:100%;min-height:30px;padding:4px;font-size:11px}.bwrap small{opacity:.8}
+.bwrap.eq .bcard{box-shadow:0 0 18px var(--c),0 0 0 2px var(--gold)}
+.bcard{--bw:clamp(112px,calc(var(--vh)*36),150px);width:var(--bw);height:calc(var(--bw)*1.42);position:relative;flex:0 0 auto;border-radius:10px;padding:6px;display:flex;flex-direction:column;gap:4px;color:var(--c);background:linear-gradient(160deg,var(--d2),var(--d1));border:2px solid var(--rb,#8a909c);box-shadow:0 6px 14px rgba(0,0,0,.6),inset 0 0 0 2px rgba(0,0,0,.45);overflow:hidden;font-family:Cinzel,Georgia,serif;text-align:left}
+.bcard::after{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.14) 48%,transparent 62%)}
+.bcard.big{--bw:clamp(130px,calc(var(--vh)*42),176px)}
+.rb-common{--rb:#8a909c}.rb-rare{--rb:#5aa8ff}.rb-epic{--rb:#b46bff}.rb-legendary{--rb:#ffcf4a}
+.bc-top{display:flex;align-items:center;gap:5px;font-size:8px;letter-spacing:.12em}.bc-el .sg{font-size:14px}.bc-lv{margin-left:auto;color:#f6ead0;font-weight:800;font-size:9px}
+.bc-art{flex:1;min-height:0;position:relative;border-radius:6px;display:grid;place-items:center;font-size:calc(var(--bw)*.36);background:radial-gradient(circle at 50% 55%,color-mix(in srgb,var(--c) 35%,transparent),rgba(0,0,0,.55) 75%);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);overflow:hidden}
+.bc-art .sg{filter:drop-shadow(0 0 8px var(--c));position:relative;z-index:1}
+.bc-aura{position:absolute;inset:-25%;background:conic-gradient(from 0deg,transparent,color-mix(in srgb,var(--c) 30%,transparent),transparent 30%,transparent 50%,color-mix(in srgb,var(--c) 22%,transparent),transparent 80%);animation:spin 9s linear infinite}
+.bc-role{position:absolute;bottom:3px;font-size:6.5px;letter-spacing:.2em;color:#f3e3b3;opacity:.85;z-index:1}
+.bc-name{text-align:center;font-size:9.5px;font-weight:800;letter-spacing:.08em;color:#f6ead0;background:linear-gradient(90deg,transparent,rgba(232,195,106,.28),transparent);padding:2px 0}
+.bc-ab{display:flex;flex-direction:column;gap:1px;font-size:7.5px;line-height:1.2;color:#e8dcc0}.bc-ab b{font-size:8px;color:var(--c)}.bc-ab em{font-style:normal;opacity:.7;margin-left:4px;font-size:6.5px;letter-spacing:.1em}.bc-bonus{color:var(--gold)}
+.bc-foot{display:flex;justify-content:center}.pips{display:flex;gap:4px}.pips i{width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--gold);display:block}.pips i.on{background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.empty{grid-column:1/-1;max-width:420px;margin:20px auto;text-align:center;font-size:12px;line-height:1.5}.empty h3{color:var(--gold);letter-spacing:.2em}
+.cgrid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))!important;justify-items:center;gap:10px!important}
+.rv2{display:flex;align-items:center;justify-content:center;gap:22px;animation:rvin .5s ease-out;padding:0 14px}.rvt{display:flex;flex-direction:column;gap:6px;align-items:flex-start;text-align:left;max-width:300px}.rvt .rtag{color:var(--gold);letter-spacing:.14em;font-weight:800;font-size:13px}.rvt h2{margin:0;font-size:18px;letter-spacing:.16em;color:#f3e3b3}.rvt p{margin:0;font-size:12px}
+.beast{border-width:2px;border-color:var(--rb,rgba(232,195,106,.55))}.beast.none{opacity:.45;justify-content:center;border-style:dashed;border-color:rgba(232,195,106,.35)}
+.beast::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.12) 48%,transparent 60%)}
+.ring{width:34px;height:34px;font-size:20px}
 </style>
 </head>
 <body>
@@ -193,7 +222,9 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
     <div class="hand" id="hand"></div>
   </div>
   <aside class="side" id="oSlots"></aside>
-  <canvas id="fxc"></canvas><div id="coll" hidden><div class="cbar"><button class="mini" id="cBack">&larr; HOME</button><b>COLLECTION</b><span id="cInfo"></span><button class="primary" id="cSummon">SUMMON</button></div><div class="cbody"><div class="cgrid" id="cGrid"></div><div class="cside" id="cSide"></div></div></div><div id="summon" hidden></div><div id="flash"></div><div id="banner"></div><div class="frost" id="frost0" hidden></div><div class="frost" id="frost1" hidden></div>
+  <canvas id="fxc"></canvas><div id="rulesScr" class="scr" hidden><div class="cbar"><button class="mini" id="rulesBack">&larr; HOME</button><b>RULES</b></div><div class="scrbody rules" id="rulesBody"></div></div>
+<div id="setScr" class="scr" hidden><div class="cbar"><button class="mini" id="setBack">&larr; HOME</button><b>SETTINGS</b></div><div class="scrbody" id="setBody"></div></div>
+<div id="coll" hidden><div class="cbar"><button class="mini" id="cBack">&larr; HOME</button><b>COLLECTION</b><span id="cInfo"></span><button class="primary" id="cSummon">SUMMON</button></div><div class="cbody"><div class="cgrid" id="cGrid"></div><div class="cside" id="cSide"></div></div></div><div id="summon" hidden></div><div id="flash"></div><div id="banner"></div><div class="frost" id="frost0" hidden></div><div class="frost" id="frost1" hidden></div>
   <div id="modal" hidden><div class="box" id="box"></div></div>
 </section>
 
@@ -243,12 +274,23 @@ B.BEASTS.thorn_sentinel={id:'thorn_sentinel',name:'Thorn Sentinel',el:'nature',r
 B.BEASTS.shade_wraith={id:'shade_wraith',name:'Shade Wraith',el:'shadow',role:'Attack',rarity:'epic',level:1,fx:'shadow',anim:'shade_wraith',ability:{id:'night_terror',name:'Night Terror',type:'attack',effect:'draw3',counterTags:['absorb','negate_attack'],desc:'The rival draws three cards.'}};
 B.EFFECTS.draw1=function(s,by,d){var n=drawTo(s,d,1,'beast');s.log.push(nm(d)+' draw'+(d?'s':'')+' '+n);return{label:'+'+n+' CARD'}};
 B.EFFECTS.draw3=function(s,by,d){var n=drawTo(s,d,3,'beast');s.log.push(nm(d)+' draw'+(d?'s':'')+' '+n);return{label:'+'+n+' CARDS'}};
+B.LEVELS=[0,1,3,6,10];B.MAX_LEVEL=5;
+B.levelFor=function(d){var l=1;B.LEVELS.forEach(function(t,i){if(d>=t)l=i+1});return Math.min(l,B.MAX_LEVEL)};
+B.levelBonus=function(l){return Math.floor((l||1)/2)};
+B.nextLevel=function(rc){return rc.level>=B.MAX_LEVEL?null:{need:B.LEVELS[rc.level],have:rc.dupes}};
+var SC={frost_wolf:'amount',solar_phoenix:'none',storm_dragon:'amount',stoneback:'retaliate',ember_hound:'amount',thorn_sentinel:'retaliate',shade_wraith:'amount'};
+Object.keys(SC).forEach(function(id){B.BEASTS[id].ability.scale=SC[id]});
+function bn(a,l){return a.scale==='amount'?B.levelBonus(l):0}
+B.EFFECTS.freeze=function(s,by,d,a,l){s.freeze[d]=true;s.freezeDraw[d]=1+bn(a,l);s.log.push(nm(d)+(d?' is':' are')+' frozen');return{label:'FROZEN'+(bn(a,l)?' +'+bn(a,l):'')}};
+B.EFFECTS.draw2_skip=function(s,by,d,a,l){var n=drawTo(s,d,2+bn(a,l),'beast');s.steps=2;s.log.push(nm(d)+' draw'+(d?'s':'')+' '+n+' and lose'+(d?'s':'')+' a turn');return{label:'+'+n+' CARDS, TURN LOST'}};
+B.EFFECTS.draw1=function(s,by,d,a,l){var n=drawTo(s,d,1+bn(a,l),'beast');s.log.push(nm(d)+' draw'+(d?'s':'')+' '+n);return{label:'+'+n+(n>1?' CARDS':' CARD')}};
+B.EFFECTS.draw3=function(s,by,d,a,l){var n=drawTo(s,d,3+bn(a,l),'beast');s.log.push(nm(d)+' draw'+(d?'s':'')+' '+n);return{label:'+'+n+' CARDS'}};
 Object.keys(B.BEASTS).forEach(function(id){var d=B.BEASTS[id];d.art=d.art||null;d.upgrades=d.upgrades||[];d.alt=d.alt||[];d.evolvesTo=d.evolvesTo||null});
 function ev(s,o){o.id=++s.evtN;s.evts.push(o)}
 function adv(s,p,n){return(((p+s.dir*n)%2)+2)%2}
-B.buildDeck=function(){var d=[],n=0,c,v;
- EL.forEach(function(e){for(v=1;v<=7;v++)for(c=0;c<2;c++)d.push({id:'c'+(n++),t:'num',el:e,v:v})});
- ACT.forEach(function(a){for(c=0;c<2;c++)d.push({id:'c'+(n++),t:a,el:null,v:null})});
+B.buildDeck=function(k){k=k||2;var d=[],n=0,c,v;
+ EL.forEach(function(e){for(v=1;v<=7;v++)for(c=0;c<k;c++)d.push({id:'c'+(n++),t:'num',el:e,v:v})});
+ ACT.forEach(function(a){for(c=0;c<k;c++)d.push({id:'c'+(n++),t:a,el:null,v:null})});
  return d};
 function drawCard(s){
  if(!s.deck.length&&s.discard.length>1){var top=s.discard.pop();s.deck=shuffle(s.discard.splice(0),s.rng);s.discard=[top];s.log.push('Deck reshuffled')}
@@ -262,16 +304,17 @@ B.counters=function(s,p){if(!s.pending)return[];var ct=s.beasts[s.pending.by][s.
  return s.beasts[p].map(function(x,i){var a=x.b.ability;return!x.used&&a.type==='defense'&&a.provides.some(function(t){return ct.indexOf(t)>=0})?i:-1}).filter(function(i){return i>=0})};
 B.actor=function(s){return s.phase==='counter'?1-s.cur:s.cur};
 function pick3(r){return shuffle(B.COLLECTION.slice(),r).slice(0,3)}
-B.newMatch=function(rng,loads){rng=rng||Math.random;
- var deck=shuffle(B.buildDeck(),rng),i=deck.findIndex(function(c){return c.t==='num'}),top=deck.splice(i,1)[0];
+B.newMatch=function(rng,loads,opts){rng=rng||Math.random;opts=opts||{};var hand=Math.max(3,Math.min(12,opts.hand|0||7)),copies=opts.copies===1?1:2;
+ var deck=shuffle(B.buildDeck(copies),rng),i=deck.findIndex(function(c){return c.t==='num'}),top=deck.splice(i,1)[0];
  loads=loads||[];loads[0]=loads[0]||B.COLLECTION.slice(0,3);loads[1]=loads[1]||pick3(rng);
- var s={rng:rng,deck:deck,discard:[top],hands:[[],[]],cur:rng()<.5?0:1,dir:1,el:top.el,steps:1,phase:'play',drawn:null,played:null,pending:null,freeze:[false,false],respMs:5000,evts:[],evtN:0,winner:null,over:false,stall:0,log:[],beasts:[mk(loads[0]),mk(loads[1])]};
- for(i=0;i<7;i++){s.hands[0].push(deck.pop());s.hands[1].push(deck.pop())}
+ var s={rng:rng,deck:deck,discard:[top],hands:[[],[]],cur:rng()<.5?0:1,dir:1,el:top.el,steps:1,phase:'play',drawn:null,played:null,pending:null,freeze:[false,false],freezeDraw:[1,1],hand:hand,copies:copies,respMs:5000,evts:[],evtN:0,winner:null,over:false,stall:0,log:[],beasts:[mk(loads[0]),mk(loads[1])]};
+ for(i=0;i<hand;i++){s.hands[0].push(deck.pop());s.hands[1].push(deck.pop())}
+ ev(s,{type:'shuffle'});[0,1].forEach(function(p){ev(s,{type:'deal',p:p,ids:s.hands[p].map(function(c){return c.id}),cards:s.hands[p].slice()})});ev(s,{type:'flipTop',card:top});
  s.log.push(nm(s.cur)+(s.cur?' starts':' start'));
  startTurn(s);return s};
 function startTurn(s){var g=0;
  for(;;){s.phase='play';s.drawn=null;s.steps=1;s.played=null;
-  if(s.freeze[s.cur]&&g++<4){s.freeze[s.cur]=false;ev(s,{type:'frozen',p:s.cur});drawTo(s,s.cur,1,'freeze');s.log.push(nm(s.cur)+(s.cur?' is':' are')+' frozen: draw'+(s.cur?'s':'')+' a card, turn lost');s.cur=adv(s,s.cur,1);continue}
+  if(s.freeze[s.cur]&&g++<4){s.freeze[s.cur]=false;ev(s,{type:'frozen',p:s.cur});var fd=s.freezeDraw[s.cur]||1;s.freezeDraw[s.cur]=1;drawTo(s,s.cur,fd,'freeze');s.log.push(nm(s.cur)+(s.cur?' is':' are')+' frozen: draw'+(s.cur?'s':'')+' '+fd+' card'+(fd>1?'s':'')+', turn lost');s.cur=adv(s,s.cur,1);continue}
   break}}
 function finish(s){var p=s.cur;s.pending=null;s.played=null;
  if(!s.hands[p].length){s.winner=p;s.over=true;s.phase='over';return}
@@ -306,8 +349,9 @@ B.activate=function(s,slot){
  ev(s,{type:'launch',by:by,slot:slot,fel:x.b.el,atk:a.type==='attack',beast:x.b.name,ability:a.name});
  if(B.counters(s,1-by).length)s.phase='counter';else resolve(s,null);return true};
 function resolve(s,ws){var p=s.pending,by=p.by,x=s.beasts[by][p.slot],a=x.b.ability,d=1-by,w=ws===null?null:s.beasts[d][ws],r={label:'BLOCKED'};
- if(w){w.used=true;s.log.push(w.b.name+' ('+w.b.ability.name+') negated '+a.name)}else r=B.EFFECTS[a.effect](s,by,d,a)||{label:''};
- ev(s,{type:'resolve',by:by,slot:p.slot,effect:a.effect,fel:x.b.el,atk:a.type==='attack',blocked:!!w,ward:w?{p:d,slot:ws,el:w.b.el,name:w.b.name}:null,label:r.label});
+ if(w){w.used=true;s.log.push(w.b.name+' ('+w.b.ability.name+') negated '+a.name)}else r=B.EFFECTS[a.effect](s,by,d,a,x.lvl||1)||{label:''};
+ var rt=0;if(w&&a.type==='attack'&&w.b.ability.scale==='retaliate'){rt=B.levelBonus(w.lvl||1);if(rt){drawTo(s,by,rt,'beast');s.log.push(nm(by)+' draw'+(by?'s':'')+' '+rt+' (retaliation)')}}
+ ev(s,{type:'resolve',by:by,slot:p.slot,effect:a.effect,fel:x.b.el,atk:a.type==='attack',retaliate:rt,blocked:!!w,ward:w?{p:d,slot:ws,el:w.b.el,name:w.b.name}:null,label:r.label});
  finish(s)}
 B.counter=function(s,ws){
  if(s.phase!=='counter')return false;
@@ -315,17 +359,16 @@ B.counter=function(s,ws){
  resolve(s,ws);return true};
 B.timeout=function(s){return B.counter(s,null)};
 B.skipBeast=function(s){if(s.phase!=='beast')return false;finish(s);return true};
-B.SUMMON={cost:20,odds:{common:.5,rare:.3,epic:.15,legendary:.05},pool:null};
-B.STARTER={owned:['frost_wolf','solar_phoenix','stoneback'],equipped:['frost_wolf','solar_phoenix','stoneback']};
+B.SUMMON={cost:20,odds:{common:.5,rare:.3,epic:.15,legendary:.05},pool:null,maxRefund:10};
+B.STARTER={owned:[],equipped:[]};
 function rec(id){return{id:id,level:1,rarity:B.BEASTS[id].rarity,qty:1,dupes:0,progress:0,variant:'base',equipped:false}}
 B.newSave=function(shards){var s={v:2,shards:Math.max(0,shards|0),owned:{}};B.STARTER.owned.forEach(function(id){s.owned[id]=rec(id)});B.STARTER.equipped.forEach(function(id){s.owned[id].equipped=true});return s};
 B.normalizeSave=function(o){
  if(!o||typeof o!=='object'||o.v!==2||!o.owned||typeof o.owned!=='object')return B.newSave(o&&typeof o.shards==='number'?o.shards:0);
  var n={v:2,shards:Math.max(0,Math.floor(+o.shards)||0),owned:{}},eq=0;
  Object.keys(o.owned).forEach(function(id){var r=o.owned[id];if(!B.BEASTS[id]||!r||typeof r!=='object')return;
-  n.owned[id]={id:id,level:Math.max(1,r.level|0||1),rarity:B.BEASTS[id].rarity,qty:Math.max(1,r.qty|0||1),dupes:Math.max(0,r.dupes|0),progress:Math.max(0,r.progress|0),variant:typeof r.variant==='string'?r.variant:'base',equipped:false};
+  n.owned[id]={id:id,level:Math.min(B.MAX_LEVEL,Math.max(1,r.level|0||1,B.levelFor(Math.max(0,r.dupes|0)))),rarity:B.BEASTS[id].rarity,qty:Math.max(1,r.qty|0||1),dupes:Math.max(0,r.dupes|0),progress:Math.max(0,r.progress|0),variant:typeof r.variant==='string'?r.variant:'base',equipped:false};
   if(r.equipped===true&&eq<3){n.owned[id].equipped=true;eq++}});
- if(!Object.keys(n.owned).length)return B.newSave(n.shards);
  return n};
 B.equippedRecords=function(sv){return Object.keys(sv.owned).filter(function(id){return sv.owned[id].equipped}).slice(0,3).map(function(id){var r=sv.owned[id];return{id:id,level:r.level,variant:r.variant}})};
 B.rollSummon=function(save,rng){rng=rng||Math.random;var c=B.SUMMON.cost;
@@ -333,9 +376,9 @@ B.rollSummon=function(save,rng){rng=rng||Math.random;var c=B.SUMMON.cost;
  var o=JSON.parse(JSON.stringify(save)),od=B.SUMMON.odds,T=['common','rare','epic','legendary'],tot=T.reduce(function(a,t){return a+(od[t]||0)},0),x=rng()*tot,acc=0,tier='legendary',i;
  for(i=0;i<4;i++){acc+=od[T[i]]||0;if(x<acc&&(od[T[i]]||0)>0){tier=T[i];break}}
  var base=B.SUMMON.pool||B.COLLECTION,pool=base.filter(function(id){return B.BEASTS[id]&&B.BEASTS[id].rarity===tier});if(!pool.length)pool=base.slice();
- var id=pool[Math.floor(rng()*pool.length)];o.shards-=c;var r=o.owned[id],isNew=!r;
- if(isNew)o.owned[id]=rec(id);else{r.qty++;r.dupes++}
- return{ok:true,id:id,rarity:B.BEASTS[id].rarity,isNew:isNew,dupes:o.owned[id].dupes,qty:o.owned[id].qty,cost:c,save:o}};
+ var id=pool[Math.floor(rng()*pool.length)],lv=false,refund=0;o.shards-=c;var r=o.owned[id],isNew=!r;
+ if(isNew)o.owned[id]=rec(id);else{r.qty++;r.dupes++;var b4=r.level;r.level=Math.max(r.level,B.levelFor(r.dupes));lv=r.level>b4;if(b4>=B.MAX_LEVEL){refund=B.SUMMON.maxRefund;o.shards+=refund}}
+ return{ok:true,id:id,rarity:B.BEASTS[id].rarity,isNew:isNew,dupes:o.owned[id].dupes,qty:o.owned[id].qty,level:o.owned[id].level,leveledUp:lv,refund:refund,cost:c,save:o}};
 B.makeStore=function(st,key){key=key||'beastbound.save.v2';var mem=null;
  function load(){var o=null;try{var r=st&&st.getItem(key);if(r)o=JSON.parse(r)}catch(x){}
   if(!o&&mem)o=mem;
@@ -348,9 +391,11 @@ B.makeStore=function(st,key){key=key||'beastbound.save.v2';var mem=null;
   equippedIds:function(){var o=load();return Object.keys(o.owned).filter(function(i){return o.owned[i].equipped})},
   equip:function(id){var o=load(),r=o.owned[id];if(!r)return{ok:false,reason:'not owned'};if(r.equipped)return{ok:false,reason:'already equipped'};if(cnt(o)>=3)return{ok:false,reason:'max 3'};r.equipped=true;save(o);return{ok:true}},
   unequip:function(id){var o=load(),r=o.owned[id];if(!r||!r.equipped)return{ok:false,reason:'not equipped'};r.equipped=false;save(o);return{ok:true}},
+  reset:function(){return save(B.newSave(0))},
   summon:function(rng){var res=B.rollSummon(load(),rng);if(res.ok)save(res.save);return res}};
  return S};
 B.payout=function(store,s,p){var r=B.settle(s,p);if(!r)return null;if(!s.paid){s.paid=true;store.addShards(r.shards)}return{reward:r,balance:store.shards()}};
+B.aiLoadout=function(sv,rng){rng=rng||Math.random;var eq=B.equippedRecords(sv);if(!eq.length)return[];var lv=Math.max(1,Math.round(eq.reduce(function(a,r){return a+r.level},0)/eq.length));return shuffle(B.COLLECTION.slice(),rng).slice(0,eq.length).map(function(id){return{id:id,level:lv}})};
 B.REWARDS={win:10,loss:3,draw:3};
 B.settle=function(s,p){if(!s.over)return null;if(!s.reward){var o=s.winner===p?'win':s.winner===-1?'draw':'loss';s.reward={outcome:o,shards:B.REWARDS[o]}}return s.reward};
 B.makeWallet=function(st,key){key=key||'beastbound.v1';var mem={shards:0};
@@ -379,7 +424,7 @@ if(typeof module!=='undefined')module.exports=BB;
 </script>
 <script>
 (function(B){
-var $=function(i){return document.getElementById(i)},S,ME=0,AI=1,busy=false,modal=false,lastPos=null,ctimer=0,sumT=0,lastR=null;
+var $=function(i){return document.getElementById(i)},S,ME=0,AI=1,busy=false,modal=false,lastPos=null,ctimer=0,sumT=0,lastR=null,fast=false,curType='',resetArm=false;
 var SG={fire:'<path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-4-1-6 1-10z"/>',
 ice:'<path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7M9 3.5l3 2.5 3-2.5M9 20.5l3-2.5 3 2.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>',
 nature:'<path d="M4 20C4 10 9 4 20 4c0 11-6 16-16 16z"/><path d="M5 19L15 9" stroke="#0009" stroke-width="1.4" fill="none"/>',
@@ -398,19 +443,30 @@ function face(c){
 function cls(c){return 'card '+(c.el||'neutral')}
 var seq=B.makeSeq({events:function(){return S?S.evts:[]},run:function(e,fin){handle(e,fin)},onIdle:function(){tick()},wd:3000,st:function(f,m){return setTimeout(f,m)},ct:function(i){clearTimeout(i)}});
 function anim(){return seq.busy()}
-function slots(p,box){var el=B.eligible(S,p);box.innerHTML=S.beasts[p].map(function(x,i){var a=x.b.ability,ok=p===ME&&S.phase==='beast'&&el.indexOf(i)>=0&&!anim();
- return '<div class="beast '+x.b.el+(x.used?' cd':'')+(ok?' elig':'')+'" data-i="'+i+'"><div class="ring">'+sg(x.b.el)+'</div><b>'+x.b.name+'</b><small>'+a.name+'</small><small class="st">'+(x.used?'SPENT':a.type==='defense'?'GUARD':'READY')+'</small></div>'}).join('')}
+function slots(p,box){var el=B.eligible(S,p);if(!S.beasts[p].length){box.innerHTML='<div class="beast none"><small>NO BEASTS</small></div>';return}
+ box.innerHTML=S.beasts[p].map(function(x,i){var a=x.b.ability,ok=p===ME&&S.phase==='beast'&&el.indexOf(i)>=0&&!anim();
+ return '<div class="beast '+x.b.el+' rb-'+x.b.rarity+(x.used?' cd':'')+(ok?' elig':'')+'" data-i="'+i+'"><div class="ring">'+sg(x.b.el)+'</div><b>'+x.b.name+'</b><small>'+a.name+'</small><small class="st">LV '+x.lvl+' &middot; '+(x.used?'SPENT':a.type==='defense'?'GUARD':'READY')+'</small></div>'}).join('')}
+var ORD={fire:0,ice:1,nature:2,lightning:3,shadow:4},ACTS=['draw2','skip','reverse','wild','wild4'];
+function hk(c){return c.t==='num'?ORD[c.el]*10+c.v:100+ACTS.indexOf(c.t)}
+function fitHand(){var h=$('hand'),cs=h.children,n=cs.length;if(n<2){h.style.removeProperty('--ov');return}
+ var cw=cs[0].offsetWidth,avail=h.clientWidth-14,slice=Math.min(cw*.8,Math.max((avail-cw)/(n-1),18));h.style.setProperty('--ov',(slice-cw)+'px')}
+var TYPE={attack:'ATTACK',defense:'DEFENSE',support:'SUPPORT'};
+function lvText(d,lv){var b=B.levelBonus(lv),sc=d.ability.scale;if(!b||sc==='none')return '';return sc==='retaliate'?'Level bonus: attacker draws +'+b:'Level bonus: +'+b+' card'+(b>1?'s':'')}
+function bcard(d,rc,extra){var a=d.ability,lv=rc?rc.level:1,pp='';for(var i=1;i<=5;i++)pp+='<i'+(i<=lv?' class="on"':'')+'></i>';
+ return '<div class="bcard '+d.el+' rb-'+d.rarity+(extra?' '+extra:'')+'"><div class="bc-top"><span class="bc-el">'+sg(d.el)+'</span><span class="bc-rar r-'+d.rarity+'">'+d.rarity.toUpperCase()+'</span><span class="bc-lv">LV '+lv+'</span></div><div class="bc-art"><div class="bc-aura"></div>'+sg(d.el)+'<span class="bc-role">'+d.role.toUpperCase()+'</span></div><div class="bc-name">'+d.name.toUpperCase()+'</div><div class="bc-ab"><b>'+a.name+'<em>'+TYPE[a.type]+'</em></b><span>'+a.desc+'</span><span class="bc-bonus">'+lvText(d,lv)+'</span></div><div class="bc-foot"><span class="pips">'+pp+'</span></div></div>'}
+function cfg(){var d={hand:7,copies:2};try{var o=JSON.parse(localStorage.getItem('beastbound.settings')||'{}');if([5,7,10,12].indexOf(o.hand)>=0)d.hand=o.hand;if(o.copies===1)d.copies=1}catch(x){}return d}
+function saveCfg(o){try{localStorage.setItem('beastbound.settings',JSON.stringify(o))}catch(x){}}
 function open(h){modal=true;$('box').innerHTML=h;$('modal').hidden=false}
 function close(){modal=false;$('modal').hidden=true}
-function pend(){var o={hid:{},rh:0,top:null},i=seq.cur();for(;i<S.evts.length;i++){var e=S.evts[i];
- if(e.type==='draw'){if(e.p===ME)e.ids.forEach(function(id){o.hid[id]=1});else o.rh+=e.ids.length}else if(e.type==='play'&&!o.top)o.top=e.prev}return o}
+function pend(){var o={hid:{},rh:0,top:null,topBack:false},i=seq.cur();for(;i<S.evts.length;i++){var e=S.evts[i];
+ if(e.type==='draw'||e.type==='deal'){if(e.p===ME)e.ids.forEach(function(id){o.hid[id]=1});else o.rh+=e.ids.length}else if(e.type==='play'&&!o.top)o.top=e.prev;else if(e.type==='flipTop')o.topBack=true}return o}
 function render(){
  var pi=pend(),me=S.hands[ME],top=pi.top||S.discard[S.discard.length-1],ab=anim(),mine=S.cur===ME&&S.phase==='play'&&!ab,leg=mine?B.legal(S,ME):[],n=S.hands[AI].length-pi.rh;
  $('opp').innerHTML='<span>RIVAL &middot; '+n+'</span><div class="cards">'+'<div class="card back"></div>'.repeat(Math.max(0,Math.min(n,14)))+'</div>';$('dCount').textContent=S.deck.length;
- $('top').className=cls(top)+' top';$('top').innerHTML=face(top);
+ if(pi.topBack){$('top').className='card back top';$('top').innerHTML=''}else{$('top').className=cls(top)+' top';$('top').innerHTML=face(top)}
  $('chip').className='chip '+S.el;$('chip').innerHTML=sg(S.el)+S.el.toUpperCase()+' '+(S.dir>0?'&#8635;':'&#8634;');
- $('hand').innerHTML=me.map(function(c){var ok=leg.some(function(l){return l.id===c.id});return '<div class="'+cls(c)+(ok?' ok':' no')+'" data-id="'+c.id+'"'+(pi.hid[c.id]?' style="visibility:hidden"':'')+'>'+face(c)+'</div>'}).join('');
- slots(AI,$('oSlots'));slots(ME,$('mSlots'));
+ $('hand').innerHTML=me.slice().sort(function(a,b){return hk(a)-hk(b)}).map(function(c){var ok=leg.some(function(l){return l.id===c.id});return '<div class="'+cls(c)+(ok?' ok':' no')+'" data-id="'+c.id+'"'+(pi.hid[c.id]?' style="visibility:hidden"':'')+'>'+face(c)+'</div>'}).join('');
+ fitHand();slots(AI,$('oSlots'));slots(ME,$('mSlots'));
  $('msg').textContent=S.log.slice(-2).join('. ');
  var showB=S.phase==='beast'&&S.cur===ME&&!ab;
  $('beastBtns').innerHTML=showB?B.eligible(S,ME).map(function(i){return '<button class="primary" data-act="'+i+'">UNLEASH '+S.beasts[ME][i].b.name.toUpperCase()+'</button>'}).join(''):'';
@@ -433,7 +489,16 @@ function fly(c,from,to,a0,a1,d,cb){if(!FXK){cb&&cb();return}d*=FXK;var g=$('game
  var w=el.offsetWidth,h=el.offsetHeight,mid={x:(from.x+to.x)/2,y:(from.y+to.y)/2};
  function T(p,dy,a,s,z){return 'translate('+(p.x-w/2)+'px,'+(p.y-h/2+dy)+'px) perspective(900px) rotateY('+a+'deg) rotateZ('+z+'deg) scale('+s+')'}
  el.animate([{transform:T(from,0,a0,.9,-6)},{transform:T(mid,-28,(a0+a1)/2,1.15,4),offset:.5},{transform:T(to,0,a1,1,0)}],{duration:d,easing:'cubic-bezier(.3,.7,.3,1)',fill:'forwards'}).onfinish=function(){el.remove();cb&&cb()}}
-function handle(e,fin){var m=S;
+function shuffleFx(fin){if(!FXK){fin();return}var pile=loc($('drawPile')),n=14,F=fast?.25:1,done=0,g=$('game');banner('SHUFFLING','#f3e3b3');
+ for(var i=0;i<n;i++)(function(i){var el=document.createElement('div');el.className='fly';el.innerHTML='<div class="ff card back"></div><div class="fb card back"></div>';g.appendChild(el);var w=el.offsetWidth,sd=i%2?1:-1;
+  function T(dx,dy,z){return 'translate('+(pile.x-w/2+dx)+'px,'+(pile.y-el.offsetHeight/2+dy)+'px) rotateZ('+z+'deg)'}
+  el.animate([{transform:T(0,0,0),offset:0},{transform:T(sd*w*.9,-6,sd*8),offset:.35},{transform:T(sd*w*.9,-6,sd*8),offset:.5},{transform:T(sd*w*.15,-i*1.2,sd*-3),offset:.8},{transform:T(0,-i*.8,0),offset:1}],{duration:900*FXK*F,delay:i*45*FXK*F,fill:'both',easing:'ease-in-out'}).onfinish=function(){el.remove();if(++done===n)fin()}})(i)}
+function dealFx(e,fin){var F=fast?.25:1,pile=loc($('drawPile')),dest=e.p===ME?loc($('hand')):loc($('opp')),k=0,n=e.cards.length;if(!FXK||!n){fin();return}
+ e.cards.forEach(function(c,i){setTimeout(function(){fly(e.p===ME?c:null,pile,dest,180,e.p===ME?0:180,380*F,function(){if(++k===n)fin()})},i*120*FXK*F)})}
+function handle(e,fin){var m=S;curType=e.type;
+ if(e.type==='shuffle'){shuffleFx(fin);return}
+ if(e.type==='deal'){dealFx(e,fin);return}
+ if(e.type==='flipTop'){fly(e.card,loc($('drawPile')),loc($('top')),180,0,(fast?140:520),function(){fin();playFx(e.card)});return}
  if(e.type==='play'){var from=e.p===ME?(lastPos||loc($('hand'))):loc($('opp'));lastPos=null;
   fly(e.card,from,loc($('top')),e.p===ME?0:180,0,540,function(){fin();playFx(e.card)});return}
  if(e.type==='draw'){var pile=loc($('drawPile')),dest=e.p===ME?loc($('hand')):loc($('opp')),k=0;
@@ -443,10 +508,13 @@ function handle(e,fin){var m=S;
  if(e.type==='frozen'){var p=loc($(e.p===ME?'mSlots':'oSlots'));txt(p.x,p.y-30,'FROZEN','#bfeaff');ring('ice',p.x,p.y,80);hideFrost(e.p,true);setTimeout(fin,Math.max(150,700*FXK));return}
  fin()}
 function go(fn){if(!S||busy||anim()||B.actor(S)!==ME)return;fn();tick()}
-function begin(){S=B.newMatch(Math.random,[B.equippedRecords(store.get())]);seq.reset();hideFrost(0);hideFrost(1);busy=false;lastPos=null;clearTimeout(ctimer);close();$('coll').hidden=true;$('summon').hidden=true;fit();tick()}
+function hideScreens(){['coll','summon','rulesScr','setScr'].forEach(function(i){$(i).hidden=true});clearTimeout(sumT)}
+function begin(){var sv=store.get(),c=cfg();S=B.newMatch(Math.random,[B.equippedRecords(sv),B.aiLoadout(sv)],{hand:c.hand,copies:c.copies});fast=false;seq.reset();hideFrost(0);hideFrost(1);busy=false;lastPos=null;clearTimeout(ctimer);close();hideScreens();fit();tick()}
 B.start=function(){clearTimeout(ctimer);S=null;seq.reset();$('home').hidden=true;$('game').hidden=false;begin()};
-B.openColl=function(){clearTimeout(ctimer);clearTimeout(sumT);S=null;busy=false;seq.reset();hideFrost(0);hideFrost(1);close();$('home').hidden=true;$('game').hidden=false;$('summon').hidden=true;fit();showColl()};
-function home(){clearTimeout(ctimer);S=null;busy=false;seq.reset();hideFrost(0);hideFrost(1);close();$('coll').hidden=true;$('summon').hidden=true;clearTimeout(sumT);$('game').hidden=true;$('home').hidden=false;shardsUI()}
+B.openColl=function(){clearTimeout(ctimer);clearTimeout(sumT);S=null;busy=false;seq.reset();hideFrost(0);hideFrost(1);close();$('home').hidden=true;$('game').hidden=false;hideScreens();fit();showColl()};
+function openScr(id,fn){clearTimeout(ctimer);S=null;busy=false;seq.reset();hideFrost(0);hideFrost(1);close();$('home').hidden=true;$('game').hidden=false;hideScreens();fit();$(id).hidden=false;fn()}
+B.openRules=function(){openScr('rulesScr',renderRules)};B.openSettings=function(){openScr('setScr',renderSet)};
+function home(){clearTimeout(ctimer);S=null;busy=false;seq.reset();hideFrost(0);hideFrost(1);close();hideScreens();$('game').hidden=true;$('home').hidden=false;shardsUI()}
 $('gHome').onclick=home;
 $('drawPile').onclick=function(){go(function(){B.draw(S)})};
 $('passBtn').onclick=function(){go(function(){B.pass(S)})};
@@ -502,7 +570,7 @@ function loop(now){var dt=Math.max(0,Math.min((now-last)/1000||.016,.05)),g=$('g
 function boom(el,x,y){sp(el,x,y,46,300,.7,3.2);sp(el,x,y,10,60,.35,9,'glow');ring(el,x,y,95)}
 var FXK=1;try{var sv=localStorage.getItem('bb_fx');FXK=sv!==null?+sv:(matchMedia('(prefers-reduced-motion: reduce)').matches?.5:1)}catch(x){}
 var FC={fire:'rgba(255,120,40,.45)',ice:'rgba(140,210,255,.45)',nature:'rgba(110,230,120,.4)',lightning:'rgba(255,240,150,.6)',shadow:'rgba(150,100,255,.45)'};
-function setFx(k){FXK=k;try{localStorage.setItem('bb_fx',k)}catch(x){}$('fxBtn').textContent='FX: '+(k===1?'FULL':k?'SHORT':'OFF')}
+function setFx(k){FXK=k;try{localStorage.setItem('bb_fx',k)}catch(x){}$('fxBtn').textContent='EFFECTS: '+(k===1?'FULL':k?'SHORT':'OFF');if($('setScr')&&!$('setScr').hidden)renderSet()}
 function shk(n){shake=Math.max(shake,n*FXK);if(shake)kick()}
 function flash(c){if(!FXK)return;var f=$('flash');f.style.background=FC[c]||c;f.animate([{opacity:1},{opacity:0}],{duration:300*FXK})}
 function banner(t,c){var b=$('banner');b.textContent=t;b.style.color=c;b.style.animationDuration=Math.max(.6,1.1*FXK)+'s';b.className='';void b.offsetWidth;b.className='show'}
@@ -535,8 +603,8 @@ var RC={common:'#c7ccd6',rare:'#5aa8ff',epic:'#b46bff',legendary:'#ffcf4a'};
 function showColl(){$('coll').hidden=false;renderColl()}
 function renderColl(){var sv=store.get(),ids=Object.keys(sv.owned),eq=ids.filter(function(id){return sv.owned[id].equipped}),can=sv.shards>=B.SUMMON.cost;
  $('cInfo').textContent='AWAKENING SHARDS '+sv.shards;$('cSummon').textContent='SUMMON ('+B.SUMMON.cost+')';$('cSummon').disabled=!can;
- $('cGrid').innerHTML=ids.map(function(id){var rc=sv.owned[id],d=B.BEASTS[id],a=d.ability;
-  return '<div class="btile '+d.el+(rc.equipped?' eq':'')+'"><div class="rar r-'+d.rarity+'">'+d.rarity.toUpperCase()+' &middot; '+d.el.toUpperCase()+'</div><div class="bt">'+sg(d.el)+'<b>'+d.name+'</b></div><small>LV '+rc.level+(rc.dupes?' &middot; DUPLICATES '+rc.dupes:'')+'</small><small class="ab"><i>'+a.name+'</i>: '+a.desc+'</small><button data-eq="'+id+'" class="'+(rc.equipped?'':'primary')+'">'+(rc.equipped?'UNEQUIP':'EQUIP')+'</button></div>'}).join('');
+ $('cGrid').innerHTML=ids.length?ids.map(function(id){var rc=sv.owned[id],d=B.BEASTS[id],nl=B.nextLevel(rc);
+  return '<div class="bwrap'+(rc.equipped?' eq':'')+'">'+bcard(d,rc)+'<small>'+(nl?'DUPLICATES '+nl.have+'/'+nl.need+' FOR LV '+(rc.level+1):'MAX LEVEL')+'</small><button data-eq="'+id+'" class="'+(rc.equipped?'':'primary')+'">'+(rc.equipped?'UNEQUIP':'EQUIP')+'</button></div>'}).join(''):'<div class="empty"><h3>NO BEASTS YET</h3><p>Play matches to earn Awakening Shards. Win or lose, you earn some. Then tap SUMMON (<b>'+B.SUMMON.cost+'</b> shards) and see which beast chooses you.</p></div>';
  $('cSide').innerHTML='<h3>NEXT MATCH</h3>'+[0,1,2].map(function(i){return '<div class="slot'+(eq[i]?' on':'')+'">'+(eq[i]?B.BEASTS[eq[i]].name:'EMPTY SLOT')+'</div>'}).join('')+'<small>'+eq.length+'/3 equipped</small><small>Discovered '+ids.length+'/'+B.COLLECTION.length+'</small><small id="cMsg">'+(can?'':'Win or lose, matches earn shards.')+'</small>'}
 function doSummon(){var s=$('summon');if(!s.hidden)return;var r=store.summon(Math.random);
  if(!r.ok){var m=$('cMsg');if(m)m.textContent='Need '+B.SUMMON.cost+' shards.';return}
@@ -545,8 +613,10 @@ function doSummon(){var s=$('summon');if(!s.hidden)return;var r=store.summon(Mat
  for(var i=0;i<3;i++)setTimeout(function(){if(s.dataset.stage==='wait')ring('shadow',W/2,H*.45,70+Math.random()*60)},i*500*FXK);
  clearTimeout(sumT);sumT=setTimeout(function(){reveal(r)},Math.max(0,1900*FXK))}
 function reveal(r){var s=$('summon');if(s.hidden||s.dataset.stage==='show')return;clearTimeout(sumT);s.dataset.stage='show';
- var d=B.BEASTS[r.id],a=d.ability,can=store.shards()>=B.SUMMON.cost;s.className=d.el;s.dataset.r=d.rarity;
- s.innerHTML='<div class="rv"><div class="eg">'+sg(d.el)+'</div><h2>'+d.name.toUpperCase()+'</h2><p class="rar r-'+d.rarity+'">'+d.rarity.toUpperCase()+' &middot; '+d.el.toUpperCase()+'</p><p class="ab"><i>'+a.name+'</i>: '+a.desc+'</p><p class="tag">'+(r.isNew?'NEW BEAST':'DUPLICATE &middot; x'+r.qty+' owned')+'</p><div class="acts2"><button class="primary" id="sAgain"'+(can?'':' disabled')+'>SUMMON AGAIN ('+B.SUMMON.cost+')</button><button id="sDone">CONTINUE</button></div></div>';
+ var d=B.BEASTS[r.id],can=store.shards()>=B.SUMMON.cost,nl=B.nextLevel({level:r.level,dupes:r.dupes});s.className=d.el;s.dataset.r=d.rarity;
+ var tag=r.isNew?'NEW BEAST':r.leveledUp?'LEVEL UP! NOW LV '+r.level:r.refund?'MAX LEVEL: +'+r.refund+' SHARDS BACK':'DUPLICATE';
+ var sub=r.isNew?'Added to your collection.':r.refund?'This beast is already at its highest level.':nl?'Duplicates '+nl.have+'/'+nl.need+' for LV '+(r.level+1):'';
+ s.innerHTML='<div class="rv2">'+bcard(d,{level:r.level},'big')+'<div class="rvt"><h2>'+d.name.toUpperCase()+'</h2><p class="rtag">'+tag+'</p><p class="ab">'+sub+'</p><div class="acts2"><button class="primary" id="sAgain"'+(can?'':' disabled')+'>SUMMON AGAIN ('+B.SUMMON.cost+')</button><button id="sDone">CONTINUE</button></div></div></div>';
  flash(RC[d.rarity]+'88');sp(d.el,W/2,H*.4,60,320,.9,3.5);ring(d.el,W/2,H*.4,150);ring('neutral',W/2,H*.4,90);shk(d.rarity==='legendary'?14:d.rarity==='epic'?9:4)}
 $('summon').onclick=function(e){var s=$('summon'),b=e.target.closest('button');
  if(b&&b.id==='sAgain'&&!b.disabled){s.hidden=true;doSummon();return}
@@ -557,12 +627,36 @@ $('cBack').onclick=function(){home()};
 $('cGrid').onclick=function(e){var t=e.target.closest('[data-eq]');if(!t)return;var id=t.dataset.eq,own=store.get().owned[id],res=own&&own.equipped?store.unequip(id):store.equip(id);renderColl();
  if(!res.ok){var m=$('cMsg');if(m)m.textContent=res.reason==='max 3'?'Maximum of 3 beasts equipped. Unequip one first.':'Cannot equip: '+res.reason}};
 document.getElementById('coll_btn').addEventListener('click',B.openColl);
+
+function renderRules(){var BE=B.COLLECTION.map(function(id){var d=B.BEASTS[id],a=d.ability;return '<li><b>'+d.name+'</b> ('+d.el+', '+d.rarity+') &mdash; <i>'+a.name+'</i>: '+a.desc+'</li>'}).join('');
+ $('rulesBody').innerHTML='<h3>GOAL</h3><p>Be the first player to empty your hand.</p>'
+ +'<h3>YOUR TURN</h3><p>Play <b>one</b> card that matches the top card by <b>element</b> or by <b>number</b>. If you cannot (or do not want to), tap the <b>DRAW</b> pile to take one card. If the card you drew can be played, you may play it right away, or tap KEEP &amp; PASS.</p>'
+ +'<h3>THE CARDS</h3><p>Five elements: Fire, Ice, Nature, Lightning, Shadow. Numbers 1 to 7. Action cards:</p><ul><li><b>Draw Two</b>: the rival draws 2 and loses their turn.</li><li><b>Skip</b>: the rival loses their turn.</li><li><b>Reverse</b>: flips the direction of play.</li><li><b>Wild</b>: you choose the active element.</li><li><b>Wild +4</b>: you choose the element, the rival draws 4 and loses their turn.</li></ul><p>Draw Two, Skip and Reverse can be played on any card and leave the active element unchanged. Penalties never stack. If the draw pile runs out, the discard pile is reshuffled.</p>'
+ +'<h3>BEASTS</h3><p>Equip up to <b>3</b> beasts in the Collection. After you play a card, any beast with the <b>same element as that card</b> can be unleashed (Wild cards have no element). It is always your choice. Each beast works <b>once per match</b>, so you can save it for a later turn.</p>'
+ +'<h3>COUNTERS</h3><p>When a beast attacks, a rival beast that can answer that exact attack may counter it. You get <b>5 seconds</b> to choose. A counter spends the defending beast. The attacking beast is spent either way. If time runs out, the attack lands.</p>'
+ +'<h3>FROZEN AND SKIPPED</h3><p>A frozen player cannot play on their next turn: they draw the penalty cards and the turn ends. Skips never stack.</p>'
+ +'<h3>THE BEASTS</h3><ul>'+BE+'</ul>'
+ +'<h3>WINNING</h3><p>You win when your hand is empty and every effect and counter has finished. If nobody can draw any more, the player with fewer cards wins.</p>'
+ +'<h3>SHARDS, SUMMONING AND LEVELS</h3><p>Every match pays <b>Awakening Shards</b>: '+B.REWARDS.win+' for a win, '+B.REWARDS.loss+' for a loss. <b>'+B.SUMMON.cost+'</b> shards summon a random beast. You start with <b>no beasts</b>, and the rival gets as many as you equip, at your average level.</p><p>Summoning a beast you already own is a <b>duplicate</b>: it raises that beast\'s level (duplicates needed: '+B.LEVELS.slice(1).join(', ')+' for levels 2 to '+B.MAX_LEVEL+'). Higher levels hit harder: attacks and freezes draw more cards, and guardians punish the attacker. At the top level a duplicate refunds '+B.SUMMON.maxRefund+' shards. Rarity and level are separate, so a high-level Common can beat a fresh Legendary.</p>'}
+function renderSet(){var c=cfg();function seg(k,v,l,on){return '<button class="seg'+(on?' on':'')+'" data-k="'+k+'" data-v="'+v+'">'+l+'</button>'}
+ $('setBody').innerHTML='<div class="srow"><h3>STARTING HAND</h3><p>How many cards each player is dealt at the start of a match.</p><div class="segs">'+[5,7,10,12].map(function(n){return seg('hand',n,n,c.hand===n)}).join('')+'</div></div>'
+ +'<div class="srow"><h3>DECK</h3><p>Standard: two copies of every card (80 cards). Single: one copy of every card (40 cards), so no card repeats.</p><div class="segs">'+seg('copies',2,'STANDARD 80',c.copies===2)+seg('copies',1,'SINGLE 40',c.copies===1)+'</div></div>'
+ +'<div class="srow"><h3>EFFECTS</h3><p>The attack animations, card flights, shuffle and screen shakes. Short plays them faster. Off skips them, which is quickest and saves battery. The rules and results never change.</p><div class="segs">'+seg('fx',1,'FULL',FXK===1)+seg('fx',.5,'SHORT',FXK===.5)+seg('fx',0,'OFF',FXK===0)+'</div></div>'
+ +'<div class="srow"><h3>PROGRESS</h3><p>Erase your shards and every beast and start again. Settings are kept.</p><div class="segs"><button class="seg danger" id="resetP">'+(resetArm?'TAP AGAIN TO ERASE':'RESET PROGRESS')+'</button></div></div>'}
+$('setBody').onclick=function(e){var t=e.target.closest('button');if(!t)return;
+ if(t.id==='resetP'){if(!resetArm){resetArm=true;setTimeout(function(){resetArm=false;if(!$('setScr').hidden)renderSet()},4000)}else{resetArm=false;store.reset();shardsUI()}renderSet();return}
+ var k=t.dataset.k,v=+t.dataset.v;if(k==='fx'){setFx(v);return}var c=cfg();c[k]=v;saveCfg(c);renderSet()};
+$('setBack').onclick=home;$('rulesBack').onclick=home;
+document.getElementById('rules').addEventListener('click',B.openRules);
+document.getElementById('settings').addEventListener('click',B.openSettings);
+$('game').addEventListener('pointerdown',function(){if(S&&seq.busy()&&/^(shuffle|deal|flipTop)$/.test(curType))fast=true});
+['contextmenu','selectstart','gesturestart','dblclick'].forEach(function(n){document.addEventListener(n,function(e){e.preventDefault()},{passive:false})});
 fit();})(BB);
 </script>
 <div id="upd" hidden><span>NEW BUILD READY</span><button class="primary" id="updBtn">RELOAD</button></div>
 <script>
 // Bump BUILD with every deploy so you can see which version a phone is running.
-var BUILD='2026.10.26-1';
+var BUILD='2026.10.26-2';
 (function(){
   var b=document.getElementById('build');if(b)b.textContent='BUILD '+BUILD;
   document.getElementById('updBtn').onclick=function(){location.reload()};
