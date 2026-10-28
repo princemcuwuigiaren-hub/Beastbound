@@ -1,10 +1,10 @@
 {
-  "id": "./index.html",
+  "id": "/Beastbound/",
   "name": "Beastbound",
   "short_name": "Beastbound",
   "description": "A legendary beast card game.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/Beastbound/index.html",
+  "scope": "/Beastbound/",
   "display": "fullscreen",
   "display_override": ["fullscreen", "standalone"],
   "orientation": "landscape",
